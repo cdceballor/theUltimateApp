@@ -1,4 +1,4 @@
-from flask import Flask, render_template #Import the class Flask
+from flask import Flask, render_template, redirect, url_for #Import the class Flask
 from markupsafe import escape #Import the markupsafe module to show values_iter
 from flask import request #Create request with methods
 
@@ -6,7 +6,7 @@ app = Flask(__name__) #Create a Flask instance
 # <>
 @app.route('/') #Router decorator to tell flask what URL go
 def index():
-    return "<p>Hello World</p>" #Return the message
+    return redirect(url_for('login'))
 
 @app.route('/index')
 def welcome():
@@ -30,13 +30,8 @@ def login():
         return show_login_form()
 
 def do_the_login():
-    return "<h1>You have been logged</h1>"
+    return render_template('welcome.html')
 
 def show_login_form():
     return render_template('form.html')
-    # '''
-    #           <form method="POST">
-    #               <div><label>Name: <input type="text" name="name"></label></div>
-    #               <div><label>password: <input type="password" name="password"></label></div>
-    #               <input type="submit" value="Submit">
-    #           </form>'''
+
